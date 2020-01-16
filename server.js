@@ -61,6 +61,8 @@ function handleRender(req, res) {
 }
 
 function renderMarkup(html, preloadedState) {
+  const assets = require('./dist/manifest.json');
+  const cssFiles = getCSS(assets);
   return `
     <!DOCTYPE html>
     <html>
@@ -68,7 +70,7 @@ function renderMarkup(html, preloadedState) {
         <title>Webpack SSR Demo</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="/static/dist/app.css" />
+        ${cssFiles.join('\n')}
       </head>
       <body>
         <div id="root">${html}</div>
@@ -86,3 +88,18 @@ function renderMarkup(html, preloadedState) {
     </html>
   `;
 }
+
+function getCSS(assets) {
+  const files = [];
+  Object.entries(assets).forEach(item => {
+    if (item[1].includes('.css')) {
+      files.push(
+        `<link rel="stylesheet" type="text/css" href="/static/dist/${item[1]}" />`
+      );
+    }
+  });
+  return files;
+}
+
+// function getScript(assets) {
+// }

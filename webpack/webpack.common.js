@@ -1,20 +1,13 @@
-const path = require('path');
-const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 module.exports = {
   entry: {
-    app: './src/app.js'
+    app: './src/client.jsx'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.less']
-  },
-  output: {
-    filename: '[name].js',
-    publicPath: '/static/dist/',
-    path: path.resolve(__dirname, '../dist')
   },
   module: {
     rules: [
@@ -112,12 +105,8 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // all options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: false // Enable to remove warnings about conflicting order
+    new WebpackAssetsManifest({
+      writeToDisk: true
     })
   ]
 };

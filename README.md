@@ -1,28 +1,6 @@
 # React ssr boilerplate
 
-The small kit for project with Webpack + TypeScript + React + Less
+Server render boilerplate using React & Redux & Express & Webpack
 
-## Development
+# This project is under development. Still a lot of stuffs are missing
 
-**Watch**
-
-```bash
-npm i
-```
-
-```bash
-npm run dev
-```
-
-## Production
-
-**Build**
-
-```bash
-npm i
-```
-
-```bash
-npm run build
-npm run prod
-```
